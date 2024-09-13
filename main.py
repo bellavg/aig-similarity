@@ -1,15 +1,16 @@
 import argparse
-import networkx as nx
 import os
-from aigverse import read_aiger_into_aig
+
 import pandas as pd
-from utils import get_graph
-from distances import get_ged, get_res_dist
+from aigverse import read_aiger_into_aig
+
+from distances import get_ged, get_res_dist, get_deltacon0
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
     "ged_approx": get_ged,  # takes forever
-    "resistance_distance": get_res_dist
+    "resistance_distance": get_res_dist,
+    "deltacon0": get_deltacon0
 
 }
 

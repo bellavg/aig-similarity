@@ -1,5 +1,5 @@
 import networkx as nx
-from aigverse import to_edge_list, read_aiger_into_aig
+from aigverse import to_edge_list
 
 
 def get_graph(aig1, aig2, directed=False):
@@ -21,6 +21,10 @@ def get_graph(aig1, aig2, directed=False):
         G2 = nx.Graph()
     G1.add_edges_from(transformed_edges1)
     G2.add_edges_from(transformed_edges2)
+
+    # Check if either graph is empty (handled separately)
+    if G1.number_of_nodes() == 0 or G2.number_of_nodes() == 0:
+        raise ValueError("Resistance distance is undefined for empty graphs.")
 
     return G1, G2
 
