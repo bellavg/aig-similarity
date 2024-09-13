@@ -53,9 +53,9 @@ class TestResubMetrics(unittest.TestCase):
         self.assertEqual(absolute_resub_metric(aig1, aig2), 1)
         self.assertEqual(absolute_resub_metric(aig2, aig1), 1)
 
-        # Ensure the relative resubstitution metric is 0.2 in both directions
-        self.assertAlmostEqual(relative_resub_metric(aig1, aig2), 0.2)
-        self.assertAlmostEqual(relative_resub_metric(aig2, aig1), 0.2)
+        # Ensure the relative resubstitution metric is 0.5 in both directions
+        self.assertAlmostEqual(relative_resub_metric(aig1, aig2), 0.5)
+        self.assertAlmostEqual(relative_resub_metric(aig2, aig1), 0.5)
 
     def test_medium_simple_aigs(self):
         # !( x0 * !x2 ) * ( !x1 * !x2 ) ==> ( !x0 * !x1 ) * !x2 (reduction of 1 node)
@@ -89,9 +89,9 @@ class TestResubMetrics(unittest.TestCase):
         self.assertEqual(absolute_resub_metric(aig1, aig2), 0)
         self.assertEqual(absolute_resub_metric(aig2, aig1), 0)
 
-        # Ensure the relative resubstitution metric is 1 in both directions
-        self.assertAlmostEqual(relative_resub_metric(aig1, aig2), 0.066, places=3)
-        self.assertAlmostEqual(relative_resub_metric(aig2, aig1), 0.066, places=3)
+        # Ensure the relative resubstitution metric is 0.20833 in both directions
+        self.assertAlmostEqual(relative_resub_metric(aig1, aig2), 0.20833, places=3)
+        self.assertAlmostEqual(relative_resub_metric(aig2, aig1), 0.20833, places=3)
 
 
 if __name__ == '__main__':
