@@ -5,19 +5,21 @@ from .matrices import _flat
 
 
 def _canberra_dist(v1, v2):
-    """The canberra distance between two vectors. We need to carefully handle
-    the case in which both v1 and v2 are zero in a certain dimension."""
-    eps = 10 ** (-15)
+    """The Canberra distance between two vectors, handling NaN values appropriately."""
     v1, v2 = [_flat(v) for v in [v1, v2]]
+    eps = 1e-15
     d_can = 0
     for u, w in zip(v1, v2):
-        if np.abs(u) < eps and np.abs(w) < eps:
-            d_update = 1
+        if np.isnan(u) or np.isnan(w):
+            d_update = 0  # Ignore dimensions where either value is NaN
         else:
-            d_update = np.abs(u - w) / (np.abs(u) + np.abs(w))
+            denom = np.abs(u) + np.abs(w)
+            if denom < eps:
+                d_update = 0  # Both u and w are zero; contribution is zero
+            else:
+                d_update = np.abs(u - w) / denom
         d_can += d_update
     return d_can
-
 
 def netsimile(G1, G2):
     """NetSimile distance between two graphs.
@@ -42,8 +44,8 @@ def netsimile(G1, G2):
     References
     ----------
     """
-    feat_A1, feat_A2 = [get_features(A) for A in [G1, G2]]
-    agg_A1, agg_A2 = [aggregate_features(feat) for feat in [feat_A1, feat_A2]]
+    feat_G1, feat_G2 = [get_features(G) for G in [G1, G2]]
+    agg_A1, agg_A2 = [aggregate_features(feat) for feat in [feat_G1, feat_G2]]
     # calculate Canberra distance between two aggregate vectors
     d_can = _canberra_dist(agg_A1, agg_A2)
     return d_can
