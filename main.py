@@ -2,9 +2,10 @@ import argparse
 import os
 
 import pandas as pd
+from veo import get_veo
 from aigverse import read_aiger_into_aig
 from spectral import get_lap_spectral_dist, get_adj_spectral_dist
-from distances import get_net_simile, get_deltacon0, get_ved, get_veo
+from netcomp_distances import get_net_simile, get_deltacon0
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
@@ -12,10 +13,7 @@ FUNCTION_MAP = {
     "netsimile":  get_net_simile,
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
-
-    "veo": get_veo,
-    "ved": get_ved,
-
+    "veo": get_veo
 }
 
 AIG_TYPES = ['bdd', 'collapse', 'dsd', 'espresso', 'lut_bidec', 'sop', 'strash', 'default']

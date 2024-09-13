@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ff9ea3d-952a-4744-90b7-b253b98d35eb" name="Changes" comment="running deltacon0, to test netsimile,  to run veo and ved">
-      <change afterPath="$PROJECT_DIR$/unittests/vertex_edge_tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/veo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetComp/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/NetComp/features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NetComp/vertex_edge.py" beforeDir="false" afterPath="$PROJECT_DIR$/NetComp/vertex_edge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/distances.py" beforeDir="false" afterPath="$PROJECT_DIR$/distances.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/distances.py" beforeDir="false" afterPath="$PROJECT_DIR$/netcomp_distances.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/spectral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/test_spectral_lap.py" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/test_spectral_dist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/deltacon_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/deltacon_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/netsimile_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/netsimile_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/vertex_edge_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/vertex_edge_tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,7 @@
       <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in test_spectral_dist.py">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIG_SIM" />
       <option name="ENV_FILES" value="" />
@@ -99,7 +98,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="adj_sd" />
+      <option name="PARAMETERS" value="veo" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -180,11 +179,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests in test_spectral_dist.py" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python tests.Python tests in vertex_edge_tests.py" />
+        <item itemvalue="Python tests.Python tests in test_spectral_dist.py" />
         <item itemvalue="Python tests.Python tests for vertex_edge_tests.TestVertexEdgeOverlapDistance" />
         <item itemvalue="Python tests.Python tests for vertex_edge_tests.TestVertexEdgeOverlapDistance.test_with_aigs_different" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +205,7 @@
       <workItem from="1726150689305" duration="11989000" />
       <workItem from="1726224275461" duration="9000" />
       <workItem from="1726224289378" duration="3441000" />
-      <workItem from="1726227762518" duration="7371000" />
+      <workItem from="1726227762518" duration="8608000" />
     </task>
     <task id="LOCAL-00001" summary="Start new aig_sim">
       <option name="closed" value="true" />
@@ -266,7 +265,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AIG_SIM$utils.coverage" NAME="utils Coverage Results" MODIFIED="1726216823029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AIG_SIM$.coverage" NAME=" Coverage Results" MODIFIED="1726239638307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/unittests" />
-    <SUITE FILE_PATH="coverage/AIG_SIM$main.coverage" NAME="main Coverage Results" MODIFIED="1726231456495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AIG_SIM$.coverage" NAME=" Coverage Results" MODIFIED="1726240714026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/unittests" />
+    <SUITE FILE_PATH="coverage/AIG_SIM$main.coverage" NAME="main Coverage Results" MODIFIED="1726239786313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

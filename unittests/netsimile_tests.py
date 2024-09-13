@@ -4,7 +4,7 @@ import networkx as nx
 from aigverse import read_aiger_into_aig
 
 from NetComp.netsimile import netsimile
-from distances import get_net_simile
+from netcomp_distances import get_net_simile
 
 
 class TestNetSimile(unittest.TestCase):

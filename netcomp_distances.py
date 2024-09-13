@@ -21,16 +21,4 @@ def get_net_simile(aig1,aig2):
     return netsimile(G1, G2)
 
 
-def get_veo(aig1, aig2):
-    # TODO do unittests
-    G1, G2 = get_graph(aig1, aig2, directed=False)  # resistance distance is not for directed graphs
-
-    return vertex_edge_overlap(G1,G2)
-
-
-def get_ved(aig1, aig2):
-    # TODO do unittests
-    G1, G2 = get_graph(aig1, aig2, directed=False)  # resistance distance is not for directed graphs
-
-    return vertex_edge_overlap(G1,G2)
 
