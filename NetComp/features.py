@@ -12,6 +12,7 @@ from scipy import stats
 
 _eps = 1e-10
 
+
 def get_features(G):
     """Extract features for NetSimile algorithm."""
     nodes = list(G.nodes())
@@ -98,8 +99,29 @@ def get_features(G):
 
     return feature_mat
 
+
 def aggregate_features(feature_mat, row_var=False, as_matrix=False):
-    """Returns column-wise descriptive statistics of a feature matrix."""
+    """Returns column-wise descriptive statistics of a feature matrix.
+
+    Parameters
+    ----------
+    feature_mat : NumPy array
+        Matrix on which statistics are to be calculated. Assumed to be formatted
+        so each row is an observation (a node, in the case of NetSimile).
+
+    row_var : bool, optional (default=False)
+        If True, then each variable has its own row, and statistics are
+        computed along rows rather than columns.
+
+    as_matrix : bool, optional (default=False)
+        If True, then description is returned as matrix. Otherwise, it is
+        flattened into a vector.
+
+    Returns
+    -------
+    description : NumPy array
+        Descriptive statistics of feature_mat
+    """
     axis = int(row_var)  # 0 if column-oriented, 1 if not
 
     # Use nan-aware functions to ignore NaN values
@@ -107,18 +129,43 @@ def aggregate_features(feature_mat, row_var=False, as_matrix=False):
     median = np.nanmedian(feature_mat, axis=axis)
     std = np.nanstd(feature_mat, axis=axis)
 
-    # Handle skewness and kurtosis with try-except blocks
-    try:
-        skewness = stats.skew(feature_mat, axis=axis, bias=False, nan_policy='omit')
-        skewness = np.nan_to_num(skewness, nan=0.0)
-    except:
-        skewness = np.zeros(feature_mat.shape[1 - axis])
+    # Initialize skewness and kurtosis
+    if axis == 0:
+        num_features = feature_mat.shape[1]
+    else:
+        num_features = feature_mat.shape[0]
+    skewness = np.zeros(num_features)
+    kurtosis = np.zeros(num_features)
 
-    try:
-        kurtosis = stats.kurtosis(feature_mat, axis=axis, bias=False, nan_policy='omit')
-        kurtosis = np.nan_to_num(kurtosis, nan=0.0)
-    except:
-        kurtosis = np.zeros(feature_mat.shape[1 - axis])
+    # Threshold for determining if data are nearly identical
+    delta = 1e-8
+
+    # For each feature, compute skewness and kurtosis if data varies enough
+    for i in range(num_features):
+        # Get the data for this feature
+        if axis == 0:
+            data = feature_mat[:, i]
+        else:
+            data = feature_mat[i, :]
+
+        # Remove NaN values
+        data = data[~np.isnan(data)]
+
+        if len(data) == 0:
+            # Can't compute statistics on empty data
+            skewness[i] = 0.0
+            kurtosis[i] = 0.0
+            continue
+
+        data_range = np.max(data) - np.min(data)
+        if data_range < delta:
+            # Data are nearly identical; set skewness and kurtosis to zero
+            skewness[i] = 0.0
+            kurtosis[i] = 0.0
+        else:
+            # Compute skewness and kurtosis
+            skewness[i] = stats.skew(data, bias=False)
+            kurtosis[i] = stats.kurtosis(data, bias=False)
 
     description = np.array([mean, median, std, skewness, kurtosis])
 

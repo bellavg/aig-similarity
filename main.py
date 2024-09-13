@@ -3,13 +3,16 @@ import os
 
 import pandas as pd
 from aigverse import read_aiger_into_aig
-
+from spectral import get_lap_spectral_dist, get_adj_spectral_dist
 from distances import get_net_simile, get_deltacon0, get_ved, get_veo
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
     "deltacon0": get_deltacon0,
     "netsimile":  get_net_simile,
+    "lap_sd": get_lap_spectral_dist,
+    "adj_sd": get_adj_spectral_dist,
+
     "veo": get_veo,
     "ved": get_ved,
 
