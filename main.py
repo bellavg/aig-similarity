@@ -6,6 +6,7 @@ from veo import get_veo
 from aigverse import read_aiger_into_aig
 from spectral import get_lap_spectral_dist, get_adj_spectral_dist
 from netcomp_distances import get_net_simile, get_deltacon0
+from kernel_sim import get_kernel_sim
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
@@ -13,7 +14,8 @@ FUNCTION_MAP = {
     "netsimile":  get_net_simile,
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
-    "veo": get_veo
+    "veo": get_veo,
+    "kernel_sim": get_kernel_sim
 }
 
 AIG_TYPES = ['bdd', 'collapse', 'dsd', 'espresso', 'lut_bidec', 'sop', 'strash', 'default']
