@@ -7,6 +7,7 @@ from aigverse import read_aiger_into_aig
 from spectral import get_lap_spectral_dist, get_adj_spectral_dist
 from netcomp_distances import get_net_simile, get_deltacon0
 from kernel_sim import get_kernel_sim
+from resub_metrics import absolute_resub_metric, relative_resub_metric
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
@@ -15,7 +16,9 @@ FUNCTION_MAP = {
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
     "veo": get_veo,
-    "kernel_sim": get_kernel_sim
+    "kernel_sim": get_kernel_sim,
+    "rel_resub": relative_resub_metric,
+    "abs_resub": absolute_resub_metric
 }
 
 AIG_TYPES = ['bdd', 'collapse', 'dsd', 'espresso', 'lut_bidec', 'sop', 'strash', 'default']
@@ -66,9 +69,21 @@ def get_results(args, aig_ids):
         for i, aig_type1 in enumerate(args.aig_types):
             for aig_type2 in args.aig_types[i + 1:]:
                 # Read AIGER files into AIG networks
+
                 aig1 = read_aiger_into_aig(aig_files[aig_type1])
                 aig2 = read_aiger_into_aig(aig_files[aig_type2])
-                comparison_result = comparison_function(aig1, aig2)
+                if args.metric.endswith("size_diff_metric"):
+                    optimized_aig1 = read_aiger_into_aig(
+                        os.path.join(args.optimized_path, aig_type1, filename + ".aig"))
+                    optimized_aig2 = read_aiger_into_aig(
+                        os.path.join(args.optimized_path, aig_type2, filename + ".aig"))
+
+                    size_diff1 = comparison_function(aig1, optimized_aig1)
+                    size_diff2 = comparison_function(aig2, optimized_aig2)
+
+                    comparison_result = abs(size_diff1 - size_diff2)
+                else:
+                    comparison_result = comparison_function(aig1, aig2)
 
                 # Save the comparison result in the dictionary
                 comparison_key = f"{aig_type1},{aig_type2}"
@@ -77,10 +92,6 @@ def get_results(args, aig_ids):
 
     return results_dict
 
-#TODO test 2 of one kind new csv (DONE)
-# test multiple aigtypes (more than 2),
-# test existing csv and adding on,
-# think about more than one metric at a time
 
 def main():
     # Parse the arguments

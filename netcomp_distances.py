@@ -2,7 +2,6 @@ import networkx as nx
 
 from NetComp.deltacon0 import deltacon0
 from NetComp.netsimile import netsimile
-from NetComp.vertex_edge import vertex_edge_overlap
 from utils import get_graph
 
 
