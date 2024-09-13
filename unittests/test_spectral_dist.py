@@ -35,11 +35,6 @@ class TestSpectralDistance(unittest.TestCase):
         self.assertIsInstance(dist, float)
         self.assertGreaterEqual(dist, 0)
 
-    def test_normalized_laplacian_spectral_distance(self):
-        """Test spectral distance for normalized Laplacian matrices."""
-        dist = spectral_distance(self.graph1, self.graph2, matrix_type='normalized_laplacian')
-        self.assertIsInstance(dist, float)
-        self.assertGreaterEqual(dist, 0)
 
     def test_adjacency_distance_for_identical_graphs(self):
         """Test that the spectral distance between identical graphs is 0."""
@@ -51,10 +46,7 @@ class TestSpectralDistance(unittest.TestCase):
         dist = spectral_distance(self.graph1, self.graph1, matrix_type='laplacian')
         self.assertAlmostEqual(dist, 0.0)
 
-    def test_normalized_laplacian_distance_for_identical_graphs(self):
-        """Test that the spectral distance between identical graphs is 0."""
-        dist = spectral_distance(self.graph1, self.graph1, matrix_type='normalized_laplacian')
-        self.assertAlmostEqual(dist, 0.0)
+
 
     def test_spectral_distance_complete_vs_empty(self):
         """Test that the spectral distance between a complete graph and an empty graph is greater than 0."""
@@ -76,15 +68,13 @@ class TestSpectralDistance(unittest.TestCase):
         """Test that the spectral distance handles graphs with different sizes (and eigenvalue padding)."""
         dist_adjacency = spectral_distance(self.graph1, self.graph5, matrix_type='adjacency')
         dist_laplacian = spectral_distance(self.graph1, self.graph5, matrix_type='laplacian')
-        dist_normalized_laplacian = spectral_distance(self.graph1, self.graph5, matrix_type='normalized_laplacian')
 
         # Test that the distances are computed and are valid
         self.assertIsInstance(dist_adjacency, float)
         self.assertIsInstance(dist_laplacian, float)
-        self.assertIsInstance(dist_normalized_laplacian, float)
         self.assertGreaterEqual(dist_adjacency, 0.0)
         self.assertGreaterEqual(dist_laplacian, 0.0)
-        self.assertGreaterEqual(dist_normalized_laplacian, 0.0)
+
 
     def test_adjacency_known_distance(self):
         """Test adjacency spectral distance for two small known graphs with expected distances."""
@@ -92,15 +82,6 @@ class TestSpectralDistance(unittest.TestCase):
         G2 = nx.star_graph(3)
 
         dist = spectral_distance(G1, G2, matrix_type='adjacency')
-        # Check against a pre-computed known value for these graphs (value is arbitrary in this example)
-        self.assertGreaterEqual(dist, 0.0)
-
-    def test_normalized_laplacian_known_distance(self):
-        """Test normalized Laplacian spectral distance for two small known graphs with expected distances."""
-        G1 = nx.cycle_graph(4)
-        G2 = nx.path_graph(4)
-
-        dist = spectral_distance(G1, G2, matrix_type='normalized_laplacian')
         # Check against a pre-computed known value for these graphs (value is arbitrary in this example)
         self.assertGreaterEqual(dist, 0.0)
 

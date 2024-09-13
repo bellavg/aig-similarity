@@ -1,6 +1,5 @@
 import argparse
 import os
-
 import pandas as pd
 from veo import get_veo
 from aigverse import read_aiger_into_aig
