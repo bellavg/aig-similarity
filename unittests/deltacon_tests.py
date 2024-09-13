@@ -43,8 +43,8 @@ class TestDeltaCon(unittest.TestCase):
 
     def get_deltacon0(self, G1, G2):
         # Helper method to wrap the adjacency matrices into the deltacon function
-        A1 = nx.adjacency_matrix(G1)
-        A2 = nx.adjacency_matrix(G2)
+        A1 = nx.adjacency_matrix(G1).tocsc()
+        A2 = nx.adjacency_matrix(G2).tocsc()
         return deltacon0(A1, A2)
 
     def test_identical_graphs(self):
@@ -95,6 +95,8 @@ class TestDeltaCon(unittest.TestCase):
         dist = get_deltacon0(aig1, aig2)
         self.assertGreater(dist, 0,
                            msg="Resistance distance of a graph compared to itself should be zero.")
+
+
 
 
 if __name__ == '__main__':

@@ -7,50 +7,46 @@ The fast approximation of the Belief Propogation matrix.
 """
 
 import numpy as np
-from numpy import linalg as la
 from scipy import sparse as sps
 
 
 def fast_bp(A, eps=None):
-    """Return the fast belief propogation matrix of graph associated with A.
+    """
+    Return the fast belief propagation matrix of the graph associated with A.
 
     Parameters
     ----------
-    A : NumPy matrix or Scipy sparse matrix
-        Adjacency matrix of a graph. If sparse, can be any format; CSC or CSR
-        recommended.
+    A : Scipy sparse matrix (CSC or CSR recommended)
+        Adjacency matrix of a graph.
 
     eps : float, optional (default=None)
-        Small parameter used in calculation of matrix. If not provided, it is
-        set to 1/(1+d_max) where d_max is the maximum degree.
+        Small parameter used in calculation of the fast belief propagation matrix.
+        If not provided, it is set to 1/(1 + d_max), where d_max is the maximum degree.
 
     Returns
     -------
-    S : NumPy matrix or Scipy sparse matrix
-        The fast belief propogation matrix. If input is sparse, will be returned
-        as (sparse) CSC matrix.
-
-    Notes
-    -----
-
-    References
-    ----------
-
+    S : Scipy sparse matrix
+        The fast belief propagation matrix in sparse format.
     """
-    n, m = A.shape
-    ##
-    ## TODO: implement checks on the adjacency matrix
-    ##
+    n = A.shape[0]
+
+    # Compute the degree vector (sum of rows of A)
     degs = np.array(A.sum(axis=1)).flatten()
+
+    # If eps is not provided, calculate it as 1 / (1 + d_max)
     if eps is None:
         eps = 1 / (1 + max(degs))
+
+    # Create the identity matrix I (sparse)
     I = sps.identity(n)
-    D = sps.dia_matrix((degs, [0]), shape=(n, n))
-    # form inverse of S and invert (slow!)
+
+    # Create the diagonal degree matrix D
+    D = sps.diags(degs, format='dia')
+
+    # Compute the inverse of the fast belief propagation matrix: Sinv = I + eps^2 * D - eps * A
     Sinv = I + eps ** 2 * D - eps * A
-    try:
-        S = la.inv(Sinv)
-    except:
-        Sinv = sps.csc_matrix(Sinv)
-        S = sps.linalg.inv(Sinv)
+
+    # Invert the matrix to get the belief propagation matrix S
+    S = sps.linalg.inv(Sinv.tocsc())
+
     return S

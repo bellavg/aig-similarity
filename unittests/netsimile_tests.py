@@ -3,6 +3,7 @@ import unittest
 import networkx as nx
 from aigverse import read_aiger_into_aig
 
+from NetComp.netsimile import netsimile
 from distances import get_net_simile
 
 
@@ -42,9 +43,8 @@ class TestNetSimile(unittest.TestCase):
 
     def get_net_simile(self, G1, G2):
         # Helper method to wrap the adjacency matrices into the NetSimile function
-        A1 = nx.adjacency_matrix(G1)
-        A2 = nx.adjacency_matrix(G2)
-        return netsimile(A1, A2)
+
+        return netsimile(G1, G2)
 
     def test_identical_graphs(self):
         # Test that the NetSimile distance between identical graphs is very small or zero

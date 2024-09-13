@@ -19,13 +19,12 @@ def _canberra_dist(v1, v2):
     return d_can
 
 
-def netsimile(A1, A2):
+def netsimile(G1, G2):
     """NetSimile distance between two graphs.
 
     Parameters
     ----------
-    A1, A2 : SciPy sparse array
-        Adjacency matrices of the graphs in question.
+    G1, G2 : networkx graph
 
     Returns
     -------
@@ -43,7 +42,7 @@ def netsimile(A1, A2):
     References
     ----------
     """
-    feat_A1, feat_A2 = [get_features(A) for A in [A1, A2]]
+    feat_A1, feat_A2 = [get_features(A) for A in [G1, G2]]
     agg_A1, agg_A2 = [aggregate_features(feat) for feat in [feat_A1, feat_A2]]
     # calculate Canberra distance between two aggregate vectors
     d_can = _canberra_dist(agg_A1, agg_A2)

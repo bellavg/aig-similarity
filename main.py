@@ -4,13 +4,14 @@ import os
 import pandas as pd
 from aigverse import read_aiger_into_aig
 
-from distances import get_ged, get_res_dist, get_deltacon0
+from distances import get_net_simile, get_deltacon0, get_ved, get_veo
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
-    "ged_approx": get_ged,  # takes forever
-    "resistance_distance": get_res_dist,
-    "deltacon0": get_deltacon0
+    "deltacon0": get_deltacon0,
+    "netsimile":  get_net_simile,
+    "veo": get_veo,
+    "ved": get_ved,
 
 }
 

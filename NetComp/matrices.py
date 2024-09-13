@@ -1,6 +1,25 @@
-from scipy import sparse as sps
 import numpy as np
+from scipy import sparse as sps
 from scipy.sparse import issparse
+
+
+def _pad_sparse(A, N):
+    """Pad the sparse adjacency matrix A to be of size N x N."""
+    n = A.shape[0]
+    if n == N:
+        return A
+    else:
+        rows, cols = A.nonzero()
+        data = A.data
+        A_padded = sps.csr_matrix((data, (rows, cols)), shape=(N, N))
+        return A_padded
+
+
+def sqrt_sparse_matrix(A):
+    """Compute the element-wise square root of a sparse matrix."""
+    A_sqrt = A.copy()
+    A_sqrt.data = np.sqrt(A_sqrt.data)
+    return A_sqrt
 
 
 def _flat(D):
