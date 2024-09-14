@@ -14,7 +14,7 @@ from characteristics_metrics import absolute_gate_count_metric, relative_gate_co
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
-    "deltacon0": get_deltacon0,
+    "deltacon0": get_deltacon0, # takes forever
     "netsimile": get_net_simile,
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
