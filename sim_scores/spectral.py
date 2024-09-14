@@ -1,9 +1,4 @@
-from utils import get_graph
-from scipy.linalg import eigh
-import numpy as np
-import networkx as nx
-from scipy.sparse.linalg import eigsh  # For computing top k eigenvalues efficiently
-
+from graph_utils import get_graph
 import numpy as np
 import networkx as nx
 from scipy.sparse.linalg import eigsh
@@ -85,3 +80,18 @@ def get_lap_spectral_dist(aig1, aig2):
 def get_adj_spectral_dist(aig1, aig2):
     G1, G2 = get_graph(aig1, aig2, directed=False)
     return spectral_distance(G1, G2, matrix_type='adjacency')
+
+
+def get_dir_adj_sd_inverted(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True)
+    return spectral_distance(G1, G2, matrix_type='adjacency')
+
+def get_dir_adj_sd_uninverted(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True, weights = (1,1))
+    return spectral_distance(G1, G2, matrix_type='adjacency')
+
+def get_dir_adj_sd_uninverted_weighted(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True, weighted=True)
+    return spectral_distance(G1, G2, matrix_type='adjacency')
+
+

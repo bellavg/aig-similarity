@@ -1,7 +1,7 @@
 import unittest
 from aigverse import Aig
 
-from characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, absolute_edge_count_metric, \
+from sim_scores.characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, absolute_edge_count_metric, \
     relative_edge_count_metric, absolute_level_count_metric, relative_level_count_metric, \
     normalized_euclidean_similarity_metric, \
     normalized_cosine_similarity_score

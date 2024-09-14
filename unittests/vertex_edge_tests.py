@@ -1,7 +1,5 @@
-import unittest
-import networkx as nx
-from veo import vertex_edge_overlap
-from veo import get_veo
+from sim_scores.veo import vertex_edge_overlap
+from sim_scores.veo import get_veo
 from aigverse import read_aiger_into_aig
 
 import unittest

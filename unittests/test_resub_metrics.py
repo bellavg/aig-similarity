@@ -1,7 +1,7 @@
 import unittest
 from aigverse import Aig
 
-from resub_metrics import absolute_resub_metric, relative_resub_metric
+from sim_scores.resub_metrics import absolute_resub_metric, relative_resub_metric
 
 
 class TestResubMetrics(unittest.TestCase):

@@ -1,62 +1,57 @@
-import networkx as nx
-from aigverse import to_edge_list
-
-
-def get_graph(aig1, aig2, directed=False):
-    edges1 = to_edge_list(aig1, inverted_weight=-1, regular_weight=1)
-    edges2 = to_edge_list(aig2, inverted_weight=-1, regular_weight=1)
-
-    # Convert to list of tuples (source, target, weight)
-    edges1 = [(e.source, e.target, e.weight) for e in edges1]
-    edges2 = [(e.source, e.target, e.weight) for e in edges2]
-
-    # Apply transformation directly on the edge lists
-    transformed_edges1 = transform_edge_list(edges1)
-    transformed_edges2 = transform_edge_list(edges2)
-    if directed:
-        G1 = nx.DiGraph()
-        G2 = nx.DiGraph()
-    else:
-        G1 = nx.Graph()
-        G2 = nx.Graph()
-    G1.add_edges_from(transformed_edges1)
-    G2.add_edges_from(transformed_edges2)
-
-    # Check if either graph is empty (handled separately)
-    if G1.number_of_nodes() == 0 or G2.number_of_nodes() == 0:
-        raise ValueError("Resistance distance is undefined for empty graphs.")
-
-    return G1, G2
+from sim_scores.spectral import (get_lap_spectral_dist, get_adj_spectral_dist,
+                                 get_dir_adj_sd_inverted, get_dir_adj_sd_uninverted,
+                                 get_dir_adj_sd_uninverted_weighted)
+from sim_scores.netcomp_distances import get_net_simile, get_deltacon0, get_ns_dir_inverted, get_ns_dir_uninverted
+from sim_scores.kernel_sim import get_kernel_sim
+from sim_scores.veo import get_veo, get_directed_veo, get_directed_uninverted
+from sim_scores.resub_metrics import absolute_resub_metric, relative_resub_metric
+from sim_scores.size_diff_metrics import absolute_size_diff_metric, relative_size_diff_metric
+from sim_scores.characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, \
+    absolute_edge_count_metric, relative_edge_count_metric, absolute_level_count_metric, relative_level_count_metric, \
+    normalized_euclidean_similarity_metric, normalized_cosine_similarity_score
 
 
 
 
-def transform_edge_list(edges):
-    """
-    For all edges in the edge list with weight -1, remove those edges
-    and add a new edge in the reverse direction with weight 1.
+# Map function names to actual function calls
+FUNCTION_MAP = {
+    "deltacon0": get_deltacon0, # takes forever
 
-    Parameters:
-    -----------
-    edges : list of tuples (u, v, weight)
-        A list of directed edges with signed weights.
+    "netsimile": get_net_simile,
+    "ns_inv": get_ns_dir_inverted,
+    "ns_dir_uninverted": get_ns_dir_uninverted,
 
-    Returns:
-    --------
-    transformed_edges : list of tuples (u, v, weight)
-        The transformed edge list.
-    """
-    transformed_edges = []
+    "lap_sd": get_lap_spectral_dist,
+    "adj_sd": get_adj_spectral_dist,
+    "adj_sd_in": get_dir_adj_sd_inverted,
+    "adj_sd_un":   get_dir_adj_sd_uninverted,
+    "adj_un_w": get_dir_adj_sd_uninverted_weighted,
 
-    # Traverse all edges in the list
-    for u, v, weight in edges:
-        if weight == -1:
-            # Add reversed edge with weight 1
-            transformed_edges.append((v, u))
-        else:
-            # Keep the original edge
-            transformed_edges.append((u, v))
+    "veo": get_veo,
+    "veo_dir": get_directed_veo,
+    "veo_dir_uninverted":get_directed_uninverted,
 
-    return transformed_edges
+    "kernel_sim": get_kernel_sim,
+
+    "rel_resub": relative_resub_metric,
+    "abs_resub": absolute_resub_metric,
+
+    "abs_size_diff": absolute_size_diff_metric,
+    "rel_size_diff": relative_size_diff_metric,
+
+    "abs_gate_count": absolute_gate_count_metric,
+    "rel_gate_count": relative_gate_count_metric,
+
+    "abs_edge_count": absolute_edge_count_metric,
+    "rel_edge_count": relative_edge_count_metric,
+
+    "abs_level_count": absolute_level_count_metric,
+    "rel_level_count": relative_level_count_metric,
+
+    "euclidean": normalized_euclidean_similarity_metric,
+    "cosine": normalized_cosine_similarity_score
+}
+
+
 
 

@@ -6,7 +6,7 @@ from scipy.stats import norm
 
 # Load both CSVs
 y_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/relative_size_diff_metric_scores.csv', index_col=0)  # CSV containing Y values
-x_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/rel_level_count_scores.csv', index_col=0)  # CSV containing X values
+x_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/relative_resub_metric_scores.csv', index_col=0)  # CSV containing X values
 
 # Initialize lists to store statistics
 all_x_vals = []
@@ -97,7 +97,7 @@ for i in range(num_columns, len(axes)):
 # Adjust layout to avoid overlap
 plt.tight_layout()
 
-plt.savefig("./levels.png")
+#plt.savefig("./levels.png")
 # Show the plot
 plt.show()
 

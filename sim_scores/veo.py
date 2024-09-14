@@ -1,4 +1,4 @@
-from utils import get_graph
+from graph_utils import get_graph
 
 
 def vertex_edge_overlap(G, G_prime):
@@ -47,4 +47,12 @@ def vertex_edge_overlap(G, G_prime):
 
 def get_veo(aig1, aig2):
     G1, G2 = get_graph(aig1, aig2, directed=False)
+    return vertex_edge_overlap(G1, G2)
+
+def get_directed_veo(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True)
+    return vertex_edge_overlap(G1, G2)
+
+def get_directed_uninverted(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True, weights=(1,1))
     return vertex_edge_overlap(G1, G2)

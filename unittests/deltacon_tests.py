@@ -4,7 +4,7 @@ import networkx as nx
 from aigverse import read_aiger_into_aig
 
 from NetComp.deltacon0 import deltacon0
-from netcomp_distances import get_deltacon0
+from sim_scores.netcomp_distances import get_deltacon0
 
 
 class TestDeltaCon(unittest.TestCase):

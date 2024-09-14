@@ -1,6 +1,6 @@
 import unittest
 import networkx as nx
-from kernel_sim import compute_graph_kernel
+from sim_scores.kernel_sim import compute_graph_kernel
 
 class TestComputeGraphKernel(unittest.TestCase):
 

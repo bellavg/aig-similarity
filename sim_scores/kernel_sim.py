@@ -1,5 +1,5 @@
 import networkx as nx
-from utils import get_graph
+from  graph_utils import get_graph
 
 
 def compute_graph_kernel(G1, G2, kernel_type='weisfeiler_lehman'):

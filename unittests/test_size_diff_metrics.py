@@ -1,7 +1,7 @@
 import unittest
 from aigverse import Aig
 
-from size_diff_metrics import absolute_size_diff_metric, relative_size_diff_metric
+from sim_scores.size_diff_metrics import absolute_size_diff_metric, relative_size_diff_metric
 
 
 class TestSizeDiffMetrics(unittest.TestCase):

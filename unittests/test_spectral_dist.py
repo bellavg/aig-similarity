@@ -1,14 +1,8 @@
-import unittest
-
-import networkx as nx
-import numpy as np
 from aigverse import read_aiger_into_aig
-from spectral import spectral_distance, get_adj_spectral_dist, get_lap_spectral_dist
+from sim_scores.spectral import spectral_distance, get_adj_spectral_dist, get_lap_spectral_dist
 
 import unittest
 import networkx as nx
-import numpy as np
-from numpy.testing import assert_almost_equal
 
 
 class TestSpectralDistance(unittest.TestCase):

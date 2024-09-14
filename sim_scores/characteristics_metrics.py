@@ -109,7 +109,7 @@ def relative_level_count_metric(aig1: Aig, aig2: Aig) -> float:
 def normalized_euclidean_similarity_metric(aig1: Aig, aig2: Aig) -> float:
     """
     Compute the normalized Euclidean similarity metric for two AIGs. The normalized Euclidean similarity metric is
-    defined as the Euclidean distance between the normalized metrics of the two AIGs, where the metrics are the number
+    defined as the Euclidean distance between the normalized sim_scores of the two AIGs, where the sim_scores are the number
     of gates, number of edges, and number of levels. The similarity score is then calculated as 1 minus the normalized
     distance divided by the maximum possible distance in the normalized space.
 
@@ -122,7 +122,7 @@ def normalized_euclidean_similarity_metric(aig1: Aig, aig2: Aig) -> float:
     edge_list1 = to_edge_list(aig1)
     edge_list2 = to_edge_list(aig2)
 
-    # Extract metrics for AIG1 and AIG2
+    # Extract sim_scores for AIG1 and AIG2
     g1, e1, l1 = aig1.num_gates(), len(edge_list1), aig1.num_levels()
     g2, e2, l2 = aig2.num_gates(), len(edge_list2), aig2.num_levels()
 
@@ -136,7 +136,7 @@ def normalized_euclidean_similarity_metric(aig1: Aig, aig2: Aig) -> float:
     max_edges = max(max_edges, 1)
     max_levels = max(max_levels, 1)
 
-    # Normalize metrics to [0, 1] range
+    # Normalize sim_scores to [0, 1] range
     g1_norm, e1_norm, l1_norm = g1 / max_gates, e1 / max_edges, l1 / max_levels
     g2_norm, e2_norm, l2_norm = g2 / max_gates, e2 / max_edges, l2 / max_levels
 
