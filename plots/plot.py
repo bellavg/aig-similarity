@@ -6,7 +6,7 @@ from scipy.stats import norm
 
 # Load both CSVs
 y_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/relative_size_diff_metric_scores.csv', index_col=0)  # CSV containing Y values
-x_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/adj_sd_scores.csv', index_col=0)  # CSV containing X values
+x_data = pd.read_csv('/Users/bellavg/AIG_SIM/data/results/veo_scores.csv', index_col=0)  # CSV containing X values
 
 # Initialize lists to store statistics
 all_x_vals = []
@@ -83,12 +83,12 @@ for idx, column in enumerate(x_data.columns):
     axes[idx].set_title(column, fontsize=16, fontfamily='monospace')  # Title with larger font
 
     # Set axis labels with larger font size
-    axes[idx].set_xlabel('Resubstitution Difference', fontsize=14)  # Larger x-axis label
+    axes[idx].set_xlabel('Vertex Edge Overlap', fontsize=14)  # Larger x-axis label
     axes[idx].set_ylabel('Relative Optimizability Difference', fontsize=14)  # Larger y-axis label
 
-    # # Fix the axis limits
-    # axes[idx].set_xlim(0, 0.55)  # Fix x-axis from 0 to 0.55
-    # axes[idx].set_ylim(0, 0.65)  # Fix y-axis from 0 to 0.65
+    # Fix the axis limits
+    axes[idx].set_xlim(0, 0.55)  # Fix x-axis from 0 to 0.55
+    axes[idx].set_ylim(0, 0.65)  # Fix y-axis from 0 to 0.65
 
 # Hide any unused subplots if the number of subplots doesn't fill the grid exactly
 for i in range(num_columns, len(axes)):
