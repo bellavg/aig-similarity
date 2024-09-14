@@ -1,6 +1,4 @@
-from sim_scores.spectral import (get_lap_spectral_dist, get_adj_spectral_dist,
-                                 get_dir_adj_sd_inverted, get_dir_adj_sd_uninverted,
-                                 get_dir_adj_sd_uninverted_weighted)
+from sim_scores.spectral import get_lap_spectral_dist, get_adj_spectral_dist
 from sim_scores.netcomp_distances import get_net_simile, get_deltacon0, get_ns_dir_inverted, get_ns_dir_uninverted
 from sim_scores.kernel_sim import get_kernel_sim
 from sim_scores.veo import get_veo, get_directed_veo, get_directed_uninverted
@@ -15,7 +13,7 @@ from sim_scores.characteristics_metrics import absolute_gate_count_metric, relat
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
-    "deltacon0": get_deltacon0, # takes forever
+    "deltacon0": get_deltacon0, # takes forever, not for no known node correspondence
 
     "netsimile": get_net_simile,
     "ns_inv": get_ns_dir_inverted,
@@ -23,10 +21,6 @@ FUNCTION_MAP = {
 
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
-    "adj_sd_in": get_dir_adj_sd_inverted,
-    "adj_sd_un":   get_dir_adj_sd_uninverted,
-    "adj_un_w": get_dir_adj_sd_uninverted_weighted,
-
     "veo": get_veo,
     "veo_dir": get_directed_veo,
     "veo_dir_uninverted":get_directed_uninverted,

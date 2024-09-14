@@ -82,16 +82,5 @@ def get_adj_spectral_dist(aig1, aig2):
     return spectral_distance(G1, G2, matrix_type='adjacency')
 
 
-def get_dir_adj_sd_inverted(aig1, aig2):
-    G1, G2 = get_graph(aig1, aig2, directed=True)
-    return spectral_distance(G1, G2, matrix_type='adjacency')
-
-def get_dir_adj_sd_uninverted(aig1, aig2):
-    G1, G2 = get_graph(aig1, aig2, directed=True, weights = (1,1))
-    return spectral_distance(G1, G2, matrix_type='adjacency')
-
-def get_dir_adj_sd_uninverted_weighted(aig1, aig2):
-    G1, G2 = get_graph(aig1, aig2, directed=True, weighted=True)
-    return spectral_distance(G1, G2, matrix_type='adjacency')
 
 
