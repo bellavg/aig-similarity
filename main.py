@@ -7,17 +7,31 @@ from spectral import get_lap_spectral_dist, get_adj_spectral_dist
 from netcomp_distances import get_net_simile, get_deltacon0
 from kernel_sim import get_kernel_sim
 from resub_metrics import absolute_resub_metric, relative_resub_metric
+from size_diff_metrics import absolute_size_diff_metric, relative_size_diff_metric
+from characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, \
+    absolute_edge_count_metric, relative_edge_count_metric, absolute_level_count_metric, relative_level_count_metric, \
+    normalized_euclidean_similarity_metric, normalized_cosine_similarity_score
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
     "deltacon0": get_deltacon0,
-    "netsimile":  get_net_simile,
+    "netsimile": get_net_simile,
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
     "veo": get_veo,
     "kernel_sim": get_kernel_sim,
     "rel_resub": relative_resub_metric,
-    "abs_resub": absolute_resub_metric
+    "abs_resub": absolute_resub_metric,
+    "abs_size_diff": absolute_size_diff_metric,
+    "rel_size_diff": relative_size_diff_metric,
+    "abs_gate_count": absolute_gate_count_metric,
+    "rel_gate_count": relative_gate_count_metric,
+    "abs_edge_count": absolute_edge_count_metric,
+    "rel_edge_count": relative_edge_count_metric,
+    "abs_level_count": absolute_level_count_metric,
+    "rel_level_count": relative_level_count_metric,
+    "euclidean": normalized_euclidean_similarity_metric,
+    "cosine": normalized_cosine_similarity_score
 }
 
 AIG_TYPES = ['bdd', 'collapse', 'dsd', 'espresso', 'lut_bidec', 'sop', 'strash', 'default']
@@ -61,17 +75,17 @@ def get_results(args, aig_ids):
 
     for filename in aig_ids:
         # Get paths to each AIG file for the given filename across different types
-        aig_files = {aig_type: os.path.join(args.folder_path, aig_type, filename+".aig")
+        aig_files = {aig_type: os.path.join(args.folder_path, aig_type, filename + ".aig")
                      for aig_type in args.aig_types}
 
         # Compare each pair of AIG types
         for i, aig_type1 in enumerate(args.aig_types):
             for aig_type2 in args.aig_types[i + 1:]:
                 # Read AIGER files into AIG networks
-
                 aig1 = read_aiger_into_aig(aig_files[aig_type1])
                 aig2 = read_aiger_into_aig(aig_files[aig_type2])
-                if args.metric.endswith("size_diff_metric"):
+
+                if args.metric.endswith("size_diff"):
                     optimized_aig1 = read_aiger_into_aig(
                         os.path.join(args.optimized_path, aig_type1, filename + ".aig"))
                     optimized_aig2 = read_aiger_into_aig(

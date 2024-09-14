@@ -51,6 +51,9 @@ def relative_resub_metric(aig1: Aig, aig2: Aig) -> float:
     original_size_1 = aig1.num_gates()
     original_size_2 = aig2.num_gates()
 
+    if original_size_1 == 0 and original_size_2 == 0:
+        return 0.0
+
     # Perform resubstitution optimization on both AIGs
     aig_resubstitution(aig1)
     aig_resubstitution(aig2)
