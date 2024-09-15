@@ -1,10 +1,11 @@
 from graph_utils import get_graph
 import numpy as np
 import networkx as nx
-from scipy.sparse.linalg import eigsh
-from scipy.linalg import eigh
+from scipy.sparse.linalg import eigsh, eigs
+from scipy.linalg import issymmetric
 
-def spectral_distance(graph1, graph2, matrix_type='adjacency', k=100):
+
+def spectral_distance(graph1, graph2, matrix_type='adjacency', k=100, which='LR'):
     """
     Compute the spectral distance between two graphs based on their adjacency, Laplacian,
     or normalized Laplacian matrices using the top k or n-1 eigenvalues of the smallest graph.
@@ -42,18 +43,19 @@ def spectral_distance(graph1, graph2, matrix_type='adjacency', k=100):
     # Use min(k, n-1) of the smallest graph
     k = min(k, min(n1, n2) - 1)
 
-    def compute_eigenvalues(matrix, k):
-        n = matrix.shape[0]
-        if k >= n:
-            # If k >= n, use dense computation
-            return eigh(matrix.toarray(), eigvals_only=True)
+    def compute_eigenvalues(matrix, k, which):
+        if issymmetric(matrix.toarray()):
+            return eigsh(matrix, k=k, which=which, return_eigenvectors=False)
         else:
-            # Use eigsh for sparse matrices
-            return eigsh(matrix, k=k, which='LA', return_eigenvectors=False)
+            return eigs(matrix, k=k, which=which, return_eigenvectors=False)
+
+
+
+
 
     # Compute eigenvalues
-    eigenvalues1 = compute_eigenvalues(matrix1, k)
-    eigenvalues2 = compute_eigenvalues(matrix2, k)
+    eigenvalues1 = compute_eigenvalues(matrix1, k, which=which)
+    eigenvalues2 = compute_eigenvalues(matrix2, k, which=which)
 
     # Sort the eigenvalues
     eigenvalues1_sorted = np.sort(eigenvalues1)
@@ -74,12 +76,16 @@ def spectral_distance(graph1, graph2, matrix_type='adjacency', k=100):
 
 def get_lap_spectral_dist(aig1, aig2):
     G1, G2 = get_graph(aig1, aig2, directed=False)
-    return spectral_distance(G1, G2, matrix_type='laplacian')
+    return spectral_distance(G1, G2, matrix_type='laplacian', which='SM')
 
 
 def get_adj_spectral_dist(aig1, aig2):
     G1, G2 = get_graph(aig1, aig2, directed=False)
-    return spectral_distance(G1, G2, matrix_type='adjacency')
+    return spectral_distance(G1, G2, matrix_type='adjacency', which='LM')
+
+def get_directed_adj_sd(aig1, aig2):
+    G1, G2 = get_graph(aig1, aig2, directed=True,weights=(1,1))
+    return spectral_distance(G1, G2, matrix_type='adjacency', which='LM')
 
 
 

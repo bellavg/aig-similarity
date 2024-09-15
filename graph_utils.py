@@ -36,6 +36,7 @@ def get_graph(aig1, aig2, directed=False, weighted=False, weights=(-1,1)):
     edges1 = to_edge_list(aig1, inverted_weight=weights[0], regular_weight=weights[1])
     edges2 = to_edge_list(aig2, inverted_weight=weights[0], regular_weight=weights[1])
 
+
     # If unweighted, strip the weights, if also undirected as no inversion
     if not weighted and not directed:
         edges1 = [(e.source, e.target) for e in edges1]

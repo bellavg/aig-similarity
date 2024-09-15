@@ -1,4 +1,4 @@
-from sim_scores.spectral import get_lap_spectral_dist, get_adj_spectral_dist
+from sim_scores.spectral import get_lap_spectral_dist, get_adj_spectral_dist, get_directed_adj_sd
 from sim_scores.netcomp_distances import get_net_simile, get_deltacon0, get_ns_dir_inverted, get_ns_dir_uninverted
 from sim_scores.kernel_sim import get_kernel_sim
 from sim_scores.veo import get_veo, get_directed_veo, get_directed_uninverted
@@ -21,11 +21,14 @@ FUNCTION_MAP = {
 
     "lap_sd": get_lap_spectral_dist,
     "adj_sd": get_adj_spectral_dist,
+    "dir_edj_sd": get_directed_adj_sd,
+
     "veo": get_veo,
     "veo_dir": get_directed_veo,
     "veo_dir_uninverted":get_directed_uninverted,
 
     "kernel_sim": get_kernel_sim,
+    "wl_2": get_wl_2,
 
     "rel_resub": relative_resub_metric,
     "abs_resub": absolute_resub_metric,
