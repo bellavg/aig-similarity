@@ -5,4 +5,4 @@ grakel
 numpy
 pandas
 matplotlib
-aigverse>=0.0.7
+aigverse>=0.0.8
