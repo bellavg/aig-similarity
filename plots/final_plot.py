@@ -28,15 +28,16 @@ selected_columns = [x_data.columns[4], x_data.columns[5]]
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 6))  # Adjust figure size for two plots
 
 # Define colors for the two plots
-colormap = plt.get_cmap('tab20')  # Color map
+colormap = plt.get_cmap('tab10')  # Color map
 
+colors = [colormap(0), colormap(2)]
 # Loop through selected columns and plot
 for idx, column in enumerate(selected_columns):
     x_vals = x_data[column]
     y_vals = y_data[column]
 
     # Scatter plot for each column
-    axes[idx].scatter(x_vals, y_vals, marker='x', color=colormap(idx), label=column)
+    axes[idx].scatter(x_vals, y_vals, marker='x', color=colors[idx], label=column)
 
     # Fit a linear trendline
     slope, intercept, r_value, p_value, std_err = stats.linregress(x_vals, y_vals)
