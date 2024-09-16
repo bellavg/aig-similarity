@@ -8,6 +8,8 @@ from scipy.stats import norm
 y_data = pd.read_csv('../data/results/relative_size_diff_metric_scores.csv', index_col=0)  # CSV containing Y values
 x_data = pd.read_csv('../data/results/relative_resub_metric_scores.csv', index_col=0)  # CSV containing X values
 
+
+
 # Initialize lists to store statistics
 all_x_vals = []
 all_y_vals = []
@@ -83,7 +85,7 @@ for idx, column in enumerate(x_data.columns):
     axes[idx].set_title(column, fontsize=16, fontfamily='monospace')  # Title with larger font
 
     # Set axis labels with larger font size
-    axes[idx].set_xlabel('Relative Level Count', fontsize=14)  # Larger x-axis label
+    axes[idx].set_xlabel('Resub Score Value', fontsize=14)  # Larger x-axis label
     axes[idx].set_ylabel('Relative Optimizability Difference', fontsize=14)  # Larger y-axis label
 
     # Fix the axis limits
@@ -97,7 +99,8 @@ for i in range(num_columns, len(axes)):
 # Adjust layout to avoid overlap
 plt.tight_layout()
 
-#plt.savefig("./levels.png")
+
+#plt.savefig("./paper_fig_resub.png")
 # Show the plot
 plt.show()
 

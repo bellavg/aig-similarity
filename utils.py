@@ -28,7 +28,6 @@ FUNCTION_MAP = {
     "veo_dir_uninverted":get_directed_uninverted,
 
     "kernel_sim": get_kernel_sim,
-    "wl_2": get_wl_2,
 
     "rel_resub": relative_resub_metric,
     "abs_resub": absolute_resub_metric,
