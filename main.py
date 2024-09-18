@@ -20,13 +20,13 @@ def parse_arguments():
         nargs='*',
         default='default'
     )
-    parser.add_argument("folder_path", type=str, help="Path to the folder containing the AIG files",
+    parser.add_argument("--folder_path", type=str, help="Path to the folder containing the AIG files",
                         nargs="?", default="data/aigs/")
-    parser.add_argument("optimized_path", type=str, help="Path to the folder containing the optimized AIG files",
+    parser.add_argument("--optimized_path", type=str, help="Path to the folder containing the optimized AIG files",
                         nargs="?", default="data/optimized/")
-    parser.add_argument("save_path", type=str, help="Path to the folder where results should be saved",
+    parser.add_argument("--save_path", type=str, help="Path to the folder where results should be saved",
                         nargs="?", default="data/results/")
-    parser.add_argument("id_path", type=str, help="Path to the txt file with aig_ids to be used",
+    parser.add_argument("--id_path", type=str, help="Path to the txt file with aig_ids to be used",
                         nargs="?", default="data/aigs/indices.txt")
     parser.add_argument("metric", type=str, choices=FUNCTION_MAP.keys(), help="Metric to apply")
     return parser.parse_args()
