@@ -8,7 +8,9 @@ from sim_scores.refactor_metrics import absolute_refactor_metric, relative_refac
 from sim_scores.size_diff_metrics import absolute_size_diff_metric, relative_size_diff_metric
 from sim_scores.characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, \
     absolute_edge_count_metric, relative_edge_count_metric, absolute_level_count_metric, relative_level_count_metric, \
-    normalized_euclidean_similarity_metric, normalized_cosine_similarity_score
+    gate_level_normalized_euclidean_similarity_metric, gate_level_cosine_similarity_metric
+from sim_scores.combined_optimization_metrics import relative_rrr_euclidean_metric, relative_rrr_cosine_metric, \
+    relative_rrr_canberra_metric, relative_rrr_bray_curtis_metric
 
 # Map function names to actual function calls
 FUNCTION_MAP = {
@@ -49,6 +51,11 @@ FUNCTION_MAP = {
     "abs_level_count": absolute_level_count_metric,
     "rel_level_count": relative_level_count_metric,
 
-    "euclidean": normalized_euclidean_similarity_metric,
-    "cosine": normalized_cosine_similarity_score
+    "gate_level_euclidean": gate_level_normalized_euclidean_similarity_metric,
+    "gate_level_cosine": gate_level_cosine_similarity_metric,
+
+    "rel_rrr_euclidean": relative_rrr_euclidean_metric,
+    "rel_rrr_cosine": relative_rrr_cosine_metric,
+    "rel_rrr_canberra": relative_rrr_canberra_metric,
+    "rel_rrr_bray_curtis": relative_rrr_bray_curtis_metric
 }

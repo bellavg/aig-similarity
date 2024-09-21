@@ -22,7 +22,7 @@ def inverse_fisher_z(z):
     return (np.exp(2 * z) - 1) / (np.exp(2 * z) + 1)
 
 # Get all CSV files in the directory, excluding the reference file itself
-csv_files = [f for f in os.listdir(directory) if f.endswith('.csv') and f != 'relative_size_diff_metric_scores.csv']
+csv_files = [f for f in os.listdir(directory) if f.endswith('.csv') and not f.startswith("relative_size_diff_metric_scores")]
 
 # Process each CSV file and compute correlations against the reference file
 for csv_file in csv_files:

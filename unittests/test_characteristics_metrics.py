@@ -3,7 +3,7 @@ from aigverse import Aig
 
 from sim_scores.characteristics_metrics import absolute_gate_count_metric, relative_gate_count_metric, absolute_edge_count_metric, \
     relative_edge_count_metric, absolute_level_count_metric, relative_level_count_metric, \
-    normalized_euclidean_similarity_metric, \
+    normalized_euclidean_distance_metric, \
     normalized_cosine_similarity_score
 
 
@@ -38,8 +38,8 @@ class TestCharacteristicsMetrics(unittest.TestCase):
         self.assertEqual(relative_level_count_metric(aig2, aig1), 0.0)
 
         # Ensure the normalized Euclidean similarity metric is 1.0 in both directions
-        self.assertEqual(normalized_euclidean_similarity_metric(aig1, aig2), 1.0)
-        self.assertEqual(normalized_euclidean_similarity_metric(aig2, aig1), 1.0)
+        self.assertEqual(normalized_euclidean_distance_metric(aig1, aig2), 1.0)
+        self.assertEqual(normalized_euclidean_distance_metric(aig2, aig1), 1.0)
 
         # Ensure the normalized cosine similarity score is 0.0 in both directions
         self.assertEqual(normalized_cosine_similarity_score(aig1, aig2), 0.0)
@@ -80,8 +80,8 @@ class TestCharacteristicsMetrics(unittest.TestCase):
         self.assertEqual(relative_level_count_metric(aig2, aig1), 0.0)
 
         # Ensure the normalized Euclidean similarity metric is 1.0 in both directions
-        self.assertEqual(normalized_euclidean_similarity_metric(aig1, aig2), 1.0)
-        self.assertEqual(normalized_euclidean_similarity_metric(aig2, aig1), 1.0)
+        self.assertEqual(normalized_euclidean_distance_metric(aig1, aig2), 1.0)
+        self.assertEqual(normalized_euclidean_distance_metric(aig2, aig1), 1.0)
 
         # Ensure the normalized cosine similarity score is 1.0 in both directions
         self.assertAlmostEqual(normalized_cosine_similarity_score(aig1, aig2), 1.0, places=5)
@@ -138,8 +138,8 @@ class TestCharacteristicsMetrics(unittest.TestCase):
         self.assertAlmostEqual(relative_level_count_metric(aig2, aig1), 0.42857, places=5)
 
         # Ensure the normalized Euclidean similarity metric is 0.38322 in both directions
-        self.assertAlmostEqual(normalized_euclidean_similarity_metric(aig1, aig2), 0.38322, places=5)
-        self.assertAlmostEqual(normalized_euclidean_similarity_metric(aig2, aig1), 0.38322, places=5)
+        self.assertAlmostEqual(normalized_euclidean_distance_metric(aig1, aig2), 0.38322, places=5)
+        self.assertAlmostEqual(normalized_euclidean_distance_metric(aig2, aig1), 0.38322, places=5)
 
         # Ensure the normalized cosine similarity score is 0.999852
         self.assertAlmostEqual(normalized_cosine_similarity_score(aig1, aig2), 0.999852, places=6)
